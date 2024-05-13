@@ -4,14 +4,12 @@ const TicTacToe = {
     isWinner : false,
 
     gameboard : [
-        ["","",""],
-        ["","",""],
-        ["","",""]
+        ["","X","O"],
+        ["X","","X"],
+        ["","O",""]
     ],
 
-    playerTurn: function(){
-        let row = prompt('Please eneter a row!');
-        let column = prompt('Please enter a column!');
+    playerTurn: function(row,column){
         if(this.gameboard[row][column] == ""){
             this.gameboard[row][column] = this.currentPlayer;
             this.switchPlayer();
@@ -23,12 +21,7 @@ const TicTacToe = {
         }
     },
 
-    displayBoard: function() {
-        for (let row of this.gameboard) {
-          console.log(row.join(' | '));
-          console.log('-------');
-        }
-    },
+
 
     switchPlayer: function(){
         this.currentPlayer = (this.currentPlayer === 'X' ? 'O' : 'X');
@@ -66,6 +59,27 @@ const TicTacToe = {
         for(let diagonal of diagonals){if(diagonal.every(element => element == diagonal[0] && diagonal[0] != '')){
             return diagonal[0];
         }}
+    },
+
+    makeMapGoLive(){
+        const spaces = document.querySelectorAll('.space');
+        console.log(spaces);
+        spaces.forEach(space => space.addEventListener("click", function(){
+            const coordinates = this.id.split("/");
+            TicTacToe.playerTurn(parseInt(coordinates[0]), parseInt(coordinates[1]));
+        }))
+    },
+
+    updateMap(){
+        const spaces = document.querySelectorAll('.space');
+        let spaceIndex = 0;
+        for( let i = 0; i <= 2; i++){
+            for(let r = 0; r <= 2; r++){
+                spaces[spaceIndex].innerHTML = this.gameboard[i][r];
+                spaceIndex++;
+            }
+            
+        }
     }
 }
 
@@ -75,4 +89,6 @@ const TicTacToe = {
 }if(TicTacToe.checkWinner()){
     alert (`${TicTacToe.currentPlayer} has won!`);
 }*/
+
+TicTacToe.updateMap();
 
