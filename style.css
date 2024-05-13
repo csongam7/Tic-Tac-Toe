@@ -1,0 +1,24 @@
+.map{
+    display: grid;
+    background-color: black;
+    gap: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    width: 80vw;
+    height: auto;
+}
+
+body{
+    display: flex;
+    left: 50%;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+}
+
+.space{
+    height: 100px;
+    width: auto;
+    background-color: blue;
+    margin: 10px;
+}
