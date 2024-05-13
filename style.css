@@ -1,10 +1,11 @@
 .map{
     display: grid;
     background-color: black;
-    gap: 30px;
+    gap: 15px;
     grid-template-columns: repeat(3, 1fr);
-    width: 80vw;
+    width: fit-content;
     height: auto;
+    border: solid black 15px;
 }
 
 body{
@@ -17,8 +18,12 @@ body{
 }
 
 .space{
-    height: 100px;
-    width: auto;
-    background-color: blue;
-    margin: 10px;
+    width: 20vw;
+    height: 20vw;
+    max-height: 200px;
+    max-width: 200px;
+    background-color: olive;
+    margin: 0;
+    padding: 0%;
+    justify-self: center;
 }
