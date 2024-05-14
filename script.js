@@ -4,24 +4,24 @@ const TicTacToe = {
     isWinner : false,
 
     gameboard : [
-        ["","X","O"],
-        ["X","","X"],
-        ["","O",""]
+        ["","",""],
+        ["","",""],
+        ["","",""]
     ],
 
     playerTurn: function(row,column){
         if(this.gameboard[row][column] == ""){
             this.gameboard[row][column] = this.currentPlayer;
+            this.updateTable(row, column);
+            if(this.checkWinner()){
+                document.querySelector('#winner').innerHTML = `${this.currentPlayer} has won!`;
+            };
             this.switchPlayer();
-            return true;
         }
         else{
             alert("Invalid input coordinates already occupied.")
-            return false;
         }
     },
-
-
 
     switchPlayer: function(){
         this.currentPlayer = (this.currentPlayer === 'X' ? 'O' : 'X');
@@ -59,36 +59,34 @@ const TicTacToe = {
         for(let diagonal of diagonals){if(diagonal.every(element => element == diagonal[0] && diagonal[0] != '')){
             return diagonal[0];
         }}
+        return false;
     },
 
-    makeMapGoLive(){
+    listenToTheTable(){
         const spaces = document.querySelectorAll('.space');
-        console.log(spaces);
         spaces.forEach(space => space.addEventListener("click", function(){
             const coordinates = this.id.split("/");
             TicTacToe.playerTurn(parseInt(coordinates[0]), parseInt(coordinates[1]));
         }))
     },
 
-    updateMap(){
+    updateTable(row, column){
         const spaces = document.querySelectorAll('.space');
-        let spaceIndex = 0;
-        for( let i = 0; i <= 2; i++){
-            for(let r = 0; r <= 2; r++){
-                spaces[spaceIndex].innerHTML = this.gameboard[i][r];
-                spaceIndex++;
-            }
-            
-        }
+        const rowColumnAsString = row.toString() + ',' + column.toString();
+        indexes = new Map();
+        indexes.set("0,0", 0);
+        indexes.set("0,1", 1);
+        indexes.set("0,2", 2);
+        indexes.set("1,0", 3);
+        indexes.set("1,1", 4);
+        indexes.set("1,2", 5);
+        indexes.set("2,0", 6);
+        indexes.set("2,1", 7);
+        indexes.set("2,2", 8);
+        
+        spaces[indexes.get(rowColumnAsString)].innerHTML = this.currentPlayer;            
     }
 }
 
-/*while (!TicTacToe.checkWinner()){
-    TicTacToe.displayBoard(),
-    TicTacToe.playerTurn()
-}if(TicTacToe.checkWinner()){
-    alert (`${TicTacToe.currentPlayer} has won!`);
-}*/
-
-TicTacToe.updateMap();
+TicTacToe.listenToTheTable()
 

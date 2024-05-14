@@ -30,3 +30,13 @@ body{
     text-align: center;
     align-content: center;
 }
+
+.space:hover{
+    transition-duration: 0.3s;
+    opacity: 50%;
+}
+
+#winner{
+    font-size: large;
+    color: red;
+}
