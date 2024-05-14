@@ -1,7 +1,6 @@
 const TicTacToe = {
 
     currentPlayer: "X",
-    isWinner : false,
 
     gameboard : [
         ["","",""],
@@ -65,8 +64,10 @@ const TicTacToe = {
     listenToTheTable(){
         const spaces = document.querySelectorAll('.space');
         spaces.forEach(space => space.addEventListener("click", function(){
+            if(!TicTacToe.checkWinner()){
             const coordinates = this.id.split("/");
             TicTacToe.playerTurn(parseInt(coordinates[0]), parseInt(coordinates[1]));
+            }
         }))
     },
 
@@ -83,10 +84,12 @@ const TicTacToe = {
         indexes.set("2,0", 6);
         indexes.set("2,1", 7);
         indexes.set("2,2", 8);
-        
         spaces[indexes.get(rowColumnAsString)].innerHTML = this.currentPlayer;            
-    }
+    },
+
 }
 
-TicTacToe.listenToTheTable()
+document.querySelector('#start-game').addEventListener('click', function(){
 
+    TicTacToe.listenToTheTable();
+})
