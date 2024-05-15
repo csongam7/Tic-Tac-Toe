@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <button id="start-game">Start a game!</button>
+    <h1>TicTacToe</h1>
+    <div class="button" id="start-game">
+      <a>Start a game!</a>
+    </div>
     <div class="map">
       <div class="space" id="0/0"></div>
       <div class="space" id="0/1"></div>
@@ -19,7 +22,9 @@
       <div class="space" id="2/1"></div>
       <div class="space" id="2/2"></div>
     </div>
-    <div id="winner"></div>
+    <div id="result">
+      <p id="result-text">X has won!</p>
+    </div>
   </body>
   <script src="./script.js"></script>
 </html>

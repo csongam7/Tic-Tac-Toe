@@ -1,6 +1,7 @@
 const TicTacToe = {
 
     currentPlayer: "X",
+    winner : false,
 
     gameboard : [
         ["","",""],
@@ -14,6 +15,7 @@ const TicTacToe = {
             this.updateTable(row, column);
             if(this.checkWinner()){
                 document.querySelector('#winner').innerHTML = `${this.currentPlayer} has won!`;
+                this.winner = true;
             };
             this.switchPlayer();
         }
@@ -63,12 +65,15 @@ const TicTacToe = {
 
     listenToTheTable(){
         const spaces = document.querySelectorAll('.space');
-        spaces.forEach(space => space.addEventListener("click", function(){
-            if(!TicTacToe.checkWinner()){
-            const coordinates = this.id.split("/");
-            TicTacToe.playerTurn(parseInt(coordinates[0]), parseInt(coordinates[1]));
-            }
-        }))
+        if(document.querySelector('#start-game > a').innerHTML == 'Start a game!'){
+            document.querySelector('#start-game > a').innerHTML = "Play another one";
+            spaces.forEach(space => space.addEventListener("click", function(){
+                {if(!TicTacToe.winner){
+                    const coordinates = this.id.split("/");
+                TicTacToe.playerTurn(parseInt(coordinates[0]), parseInt(coordinates[1]));
+                }}
+            }))
+        }
     },
 
     updateTable(row, column){
@@ -87,9 +92,22 @@ const TicTacToe = {
         spaces[indexes.get(rowColumnAsString)].innerHTML = this.currentPlayer;            
     },
 
+    clearTable(){
+        let spaces = document.querySelectorAll('.space');
+        spaces.forEach(space => space.innerHTML = '');
+        
+        this.gameboard = [
+            ["","",""],
+            ["","",""],
+            ["","",""]
+        ];
+    }
+
 }
 
 document.querySelector('#start-game').addEventListener('click', function(){
-
+    TicTacToe.clearTable();
+    document.querySelector('result').innerHTML = '';
+    TicTacToe.winner = false;
     TicTacToe.listenToTheTable();
 })

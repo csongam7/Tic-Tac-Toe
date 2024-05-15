@@ -9,6 +9,9 @@
 }
 
 body{
+    z-index: 0;
+    overflow: hidden;
+    background-color: rgb(0, 217, 255);
     display: flex;
     flex-direction: column;
     left: 50%;
@@ -18,25 +21,172 @@ body{
     justify-content: center;
 }
 
-.space{
+
+
+.space, h1{
+    cursor: pointer;
     width: 20vw;
     height: 20vw;
     max-height: 200px;
     max-width: 200px;
-    background-color: olive;
+    background-color: rgb(255, 0, 251);
+    color: rgb(0, 217, 255);
     margin: 0;
     justify-self: center;
-    font-size: calc(8vw + 12vh);
+    font-size: clamp(50px, calc(10vh + 10vw), 240px);
     text-align: center;
     align-content: center;
+    font-family: 'Luckiest Guy';
+    font-weight: 1000;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-shadow: 
+        0px -6px 0 #212121,  
+        0px -6px 0 #212121,
+        0px  6px 0 #212121,
+        0px  6px 0 #212121,
+        -6px  0px 0 #212121,  
+        6px  0px 0 #212121,
+        -6px  0px 0 #212121,
+        6px  0px 0 #212121,
+        -6px -6px 0 #212121,  
+        6px -6px 0 #212121,
+        -6px  6px 0 #212121,
+        6px  6px 0 #212121,
+        -6px  18px 0 #212121,
+        0px  18px 0 #212121,
+        6px  18px 0 #212121,
+        0 19px 1px rgba(0,0,0,.1),
+        0 0 6px rgba(0,0,0,.1),
+        0 6px 3px rgba(0,0,0,.3),
+        0 12px 6px rgba(0,0,0,.2),
+        0 18px 18px rgba(0,0,0,.25),
+        0 24px 24px rgba(0,0,0,.2),
+        0 36px 36px rgba(0,0,0,.15);
 }
 
-.space:hover{
+h1{
+    display: flex;
+    font-size: 7vw;
+    cursor: default;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    color: rgb(255, 0, 251);
+
+}
+
+.button{
+    margin-bottom: auto;
+    margin-top: 0;
+    cursor: pointer;
+    position:relative;
+    display:inline-block;
+    margin:20px;
+}
+
+.button a{
+    color:white;
+    font-family:Helvetica, sans-serif;
+    font-weight:bold;
+    font-size:36px;
+    text-align: center;
+    text-decoration:none;
+    background-color:#ff0000;
+    display:block;
+    position:relative;
+    padding:15px 40px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    text-shadow: 0px 1px 0px #000;
+    filter: dropshadow(color=#000, offx=0px, offy=1px);
+    -webkit-box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #a90000;
+    -moz-box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #a90000;
+    box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #a90000;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.button a:active{
+    top:10px;
+    background-color:#ff0000;
+    -webkit-box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #a90000;
+    -moz-box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3pxpx 0 #a90000;
+    box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #a90000;
+}
+  
+.button:after{
+    content:"";
+    height:100%;
+    width:100%;
+    padding:4px;
+    position: absolute;
+    bottom:-15px;
+    left:-4px;
+    z-index:-1;
+    background-color:#2B1800;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.space:hover:empty{
     transition-duration: 0.3s;
     opacity: 50%;
 }
 
-#winner{
-    font-size: large;
-    color: red;
+#result{
+    color: white;
+    cursor: default;
+    display: flex;
+    position: absolute;
+    background-color: transparent;
+    border-radius: 10%;
+    width: 100vw;
+    height: 100vh;
+    align-content: center;
+    justify-content: center;
+    font-size: 6vw;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    font-family: 'Luckiest Guy';
+    font-weight: 1000;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-shadow: 
+        0px -6px 0 #212121,  
+        0px -6px 0 #212121,
+        0px  6px 0 #212121,
+        0px  6px 0 #212121,
+        -6px  0px 0 #212121,  
+        6px  0px 0 #212121,
+        -6px  0px 0 #212121,
+        6px  0px 0 #212121,
+        -6px -6px 0 #212121,  
+        6px -6px 0 #212121,
+        -6px  6px 0 #212121,
+        6px  6px 0 #212121,
+        -6px  18px 0 #212121,
+        0px  18px 0 #212121,
+        6px  18px 0 #212121,
+        0 19px 1px rgba(0,0,0,.1),
+        0 0 6px rgba(0,0,0,.1),
+        0 6px 3px rgba(0,0,0,.3),
+        0 12px 6px rgba(0,0,0,.2),
+        0 18px 18px rgba(0,0,0,.25),
+        0 24px 24px rgba(0,0,0,.2),
+        0 36px 36px rgba(0,0,0,.15);
+}
+
+#result p{
+    margin-top: 20%;
+    text-align: center;
+    align-content: center;
+    display: block;
+    border: 20px solid yellow;
+    background-color: yellow;
+    border-radius: 10%;
+    height: 20vw;
+    width: 30vw;
 }
