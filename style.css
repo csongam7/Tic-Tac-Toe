@@ -136,6 +136,9 @@ h1{
 }
 
 #result{
+    display: grid;
+    grid-template-columns: 1;
+    transition: 0.5s;
     color: white;
     cursor: default;
     display: flex;
@@ -179,7 +182,8 @@ h1{
         0 36px 36px rgba(0,0,0,.15);
 }
 
-#result p{
+#result div{
+    transition: ease-in 0.4s;
     margin-top: 20%;
     text-align: center;
     align-content: center;
@@ -190,3 +194,7 @@ h1{
     height: 20vw;
     width: 30vw;
 }
+
+.button{
+    background: none;
+    border: none;}
