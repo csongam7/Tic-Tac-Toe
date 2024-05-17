@@ -1,6 +1,6 @@
 const TicTacToe = {
 
-    currentPlayer: "X",
+    currentPlayer: "O",
     winner : false,
 
     gameboard : [
@@ -14,8 +14,23 @@ const TicTacToe = {
             this.gameboard[row][column] = this.currentPlayer;
             this.updateTable(row, column);
             if(this.checkWinner()){
-                document.querySelector('#winner').innerHTML = `${this.currentPlayer} has won!`;
                 this.winner = true;
+                const result = document.querySelector('#result');
+                result.style.zIndex = '1';
+                document.querySelector('#result-text > p').innerText = `${this.currentPlayer} has won!`
+                setTimeout(() => {
+                    result.style.opacity = '1'; // Change opacity to 1 for smooth transition
+                  }, 0);
+            }
+
+            else if (this.checkIfDraw()){
+                this.winner = true;
+                const result = document.querySelector('#result');
+                result.style.zIndex = '1';
+                document.querySelector('#result-text > p').innerText = `It's a draw!`;
+                setTimeout(() => {
+                    result.style.opacity = '1'; // Change opacity to 1 for smooth transition
+                  }, 0);
             };
             this.switchPlayer();
         }
@@ -63,12 +78,21 @@ const TicTacToe = {
         return false;
     },
 
+    checkIfDraw(){
+        for(let space of this.gameboard){
+            if (space.includes('')){
+                return false;
+            }
+        }
+        return true
+    },
+
     listenToTheTable(){
         const spaces = document.querySelectorAll('.space');
         if(document.querySelector('#start-game > a').innerHTML == 'Start a game!'){
             document.querySelector('#start-game > a').innerHTML = "Play another one";
             spaces.forEach(space => space.addEventListener("click", function(){
-                {if(!TicTacToe.winner){
+                {if(!TicTacToe.winner && !TicTacToe.checkIfDraw()){
                     const coordinates = this.id.split("/");
                 TicTacToe.playerTurn(parseInt(coordinates[0]), parseInt(coordinates[1]));
                 }}
@@ -107,7 +131,14 @@ const TicTacToe = {
 
 document.querySelector('#start-game').addEventListener('click', function(){
     TicTacToe.clearTable();
-    document.querySelector('result').innerHTML = '';
     TicTacToe.winner = false;
     TicTacToe.listenToTheTable();
+})
+
+document.querySelector('.restart-button').addEventListener('click', function(){
+    TicTacToe.clearTable();
+    TicTacToe.winner = false;
+    const result = document.querySelector('#result');
+    result.style.zIndex = '-1';
+    result.style.opacity = '0';
 })
