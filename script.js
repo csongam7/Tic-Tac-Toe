@@ -18,6 +18,7 @@ const TicTacToe = {
                 const result = document.querySelector('#result');
                 result.style.zIndex = '1';
                 document.querySelector('#result-text > p').innerText = `${this.currentPlayer} has won!`
+                document.querySelector(`#${this.currentPlayer}-score`).innerHTML = parseInt(document.querySelector(`#${this.currentPlayer}-score`).innerHTML) + 1
                 setTimeout(() => {
                     result.style.opacity = '1'; // Change opacity to 1 for smooth transition
                   }, 0);
